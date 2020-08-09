@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { Subscription } from 'rxjs';
 
 import {Country, CountriesQuery} from './types.graphql';
 
 const CountriesGQLQuery = gql`
 {
-  Country {
+  Country (first: 5){
     name
+    currencies(orderBy: name_asc) {
+      code
+    }
+    officialLanguages(orderBy: name_asc) {
+      name
+    }
   }
 }`;
 
