@@ -120,6 +120,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-apollo-test"
+    }
+  },
+  "defaultProject": "angular-apollo-test",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "sass"
+    }
+  }
 }

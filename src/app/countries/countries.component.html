@@ -1,0 +1,28 @@
+<main>
+    <section class="title-container">
+      <h1 class="page-title">Countries V2</h1>
+    </section>
+    <article class="country-container" *ngFor="let country of countries">
+      <h2 class="country-name">{{country.name}}</h2>
+      <section class="country-attrs">
+        <section class="country-attr">
+          <div class="country-attr-name">Language:</div>
+          <div class="country-attr-value">
+            <ng-container *ngFor="let language of country.officialLanguages">
+              {{language.name}}
+            </ng-container>
+          </div>
+        </section>
+        <section class="country-attr">
+          <div class="country-attr-name">Currency:</div>
+          <div class="country-attr-value">
+            <ng-container *ngFor="let currency of country.currencies">
+              {{currency.code}}
+            </ng-container>  
+          </div>
+        </section>
+      </section>
+    </article>
+  </main>
+  
+  
