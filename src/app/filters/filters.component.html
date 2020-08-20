@@ -2,8 +2,10 @@
     <h2 class="filters-title">Фильтры</h2>
     <section class="filters-input-container">
         <br>
-        <input class="filters-input" type="text">
-        <span class="filters-input-placeholder">Название</span>    
+        <form (submit)="onSubmit()">
+            <input [(ngModel)]="filtersInput" name="filters" class="filters-input" type="text">
+            <span class="filters-input-placeholder">Название</span>
+        </form>
     </section>
     <article>
         <span class="filters-language-title">Язык</span>

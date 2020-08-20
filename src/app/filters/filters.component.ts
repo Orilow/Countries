@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-filters',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltersComponent implements OnInit {
 
-  constructor() { }
+  filtersInput: string;
+  
+  constructor(private requestService: RequestService) { }
 
   ngOnInit(): void {
   }
 
+  onSubmit() {
+    this.requestService.makeFilteredRequest(this.filtersInput);
+  }
 }

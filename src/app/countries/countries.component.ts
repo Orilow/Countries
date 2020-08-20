@@ -1,39 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-
-import {Country, CountriesQuery} from '../types.graphql';
-
-const CountriesGQLQuery = gql`
-{
-  Country (first: 5){
-    name
-    currencies(orderBy: name_asc) {
-      code
-    }
-    officialLanguages(orderBy: name_asc) {
-      name
-    }
-  }
-}`;
+import { RequestService } from '../services/request.service'
+import { Country } from '../types.graphql';
 
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
   styleUrls: ['./countries.component.sass']
 })
-export class CountriesComponent implements OnInit {
-
-  test: boolean;
+export class CountriesComponent implements OnInit{
   countries: Country[];
 
-  constructor(private apollo: Apollo) {}
+  constructor(private requestService: RequestService) {
+  }
 
   ngOnInit() {
-    this.apollo.watchQuery<CountriesQuery>({
-      query: CountriesGQLQuery
-    }).valueChanges.subscribe(result => {
-        console.log(result);
-        this.countries = result.data.Country;
-      });
+    this.requestService.countriesList$.subscribe(data => this.countries = data);
   }
 }
