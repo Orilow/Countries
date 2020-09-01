@@ -1,27 +1,52 @@
 <aside class="filters-container">
-    <h2 class="filters-title">Фильтры</h2>
-    <section class="filters-input-container">
-        <br>
-        <form (submit)="onSubmit()">
-            <input [(ngModel)]="filtersInput" name="filters" class="filters-input" type="text">
-            <span class="filters-input-placeholder">Название</span>
-        </form>
-    </section>
-    <article>
-        <span class="filters-language-title">Язык</span>
-        <section class="language-checkbox-container">
-            <section>
-                <input type="checkbox" class="language-checkbox" name="language" id="checkbox-russian">
-                <label for="checkbox-russian">Русский</label>    
-            </section>
-            <section>
-                <input type="checkbox" class="language-checkbox" name="language" id="checkbox-english">
-                <label for="checkbox-english">Английский</label>    
-            </section>
-            <section>
-                <input type="checkbox" class="language-checkbox" name="language" id="checkbox-chinese">
-                <label for="checkbox-chinese">Китайский</label>    
-            </section>
+    <form (ngSubmit)="onSubmit()" [formGroup]="filtersForm">
+        <h2 class="filters-title">Фильтры</h2>
+        <section class="filters-input-container">
+            <br>
+                <input formControlName="input" name="filters" class="filters-input" type="text">
+                <span class="filters-input-placeholder" [ngClass]="{'filters-input-placeholder__shift':filtersInput}">Название</span>
         </section>
-    </article>
+        <article formGroupName="languages">
+            <span class="filters-language-title">Язык</span>
+            <section class="language-checkbox-container">
+                <section>
+                    <input type="checkbox" class="language-checkbox" name="language" id="checkbox-russian" formControlName="Russian">
+                    <label for="checkbox-russian">Русский</label>    
+                </section>
+                <section>
+                    <input type="checkbox" class="language-checkbox" name="language" id="checkbox-english" formControlName="English">
+                    <label for="checkbox-english">Английский</label>    
+                </section>
+                <section>
+                    <input type="checkbox" class="language-checkbox" name="language" id="checkbox-chinese" formControlName="Chinese">
+                    <label for="checkbox-chinese">Китайский</label>    
+                </section>
+            </section>
+        </article>
+        <article>
+            <span>Валюта</span>
+            <section>
+                <section>
+                    <input type="radio" id="none-radio" name="currency" value="" formControlName="currency" checked>
+                    <label for="none-radio">None</label>    
+                </section>
+                <section>
+                    <input type="radio" id="usd-radio" name="currency" value="USD" formControlName="currency">
+                    <label for="usd-radio">USD</label>    
+                </section>
+                <section>
+                    <input type="radio" id="eur-radio" name="currency" value="EUR" formControlName="currency">
+                    <label for="eur-radio">EUR</label>    
+                </section>
+                <section>
+                    <input type="radio" id="rub-radio" name="currency" value="RUB" formControlName="currency">
+                    <label for="rub-radio">RUB</label>    
+                </section>
+                <section>
+                    <input type="radio" id="cny-radio" name="currency" value="CNY" formControlName="currency">
+                    <label for="cny-radio">CNY</label>    
+                </section>
+            </section>
+        </article>
+    </form>
 </aside>
