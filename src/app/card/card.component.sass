@@ -1,0 +1,39 @@
+@import "../../styling/variables"
+
+.card-container
+    margin-left: 64px
+    margin-top: 48px
+
+.card__title
+    font-size: 28px
+    margin-bottom: 50px
+    margin-top: 20px
+
+.card__back-button
+    color: $blue-color
+    cursor: pointer
+
+.card__back-button:before
+    content: ""
+    display: inline-block
+    width: 10px
+    height: 10px
+    margin-right: 8px
+    background-image: url('../../assets/back-pointer.svg')
+
+.card__attrs
+    display: flex
+    flex-wrap: wrap
+    width: 700px
+    
+.card__attrs__item
+    width: 350px
+    margin-bottom: 40px
+
+.attrs__item__key
+    display: inline-block 
+    width: 125px
+
+.attrs__item__value
+    display: inline-block 
+    color: $blue-color

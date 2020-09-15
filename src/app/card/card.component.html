@@ -1,2 +1,62 @@
-<p (click)="closeCard()">Вернуться</p>
-<p>{{info.name}}</p>
+<article class="card-container">
+    <p class="card__back-button" (click)="closeCard()">Вернуться</p>
+    <h1 class="card__title">{{info.name}}</h1>
+    <section class="card__attrs">
+        <section class="card__attrs__item">
+            <section class="attrs__item__key">
+                Код1:
+            </section>
+            <section class="attrs__item__value">
+                {{info.alpha2Code}}
+            </section>
+        </section>
+        <section class="card__attrs__item">
+            <section class="attrs__item__key">
+                Код2:
+            </section>
+            <section class="attrs__item__value">
+                {{info.alpha3Code}}
+            </section>
+        </section>
+        <section class="card__attrs__item">
+            <section class="attrs__item__key">
+                Столица:
+            </section>
+            <section class="attrs__item__value">
+                {{info.capital}}
+            </section>
+        </section>
+        <section class="card__attrs__item">
+            <section class="attrs__item__key">
+                Этнохороним:
+            </section>
+            <section class="attrs__item__value">
+                {{info.demonym}}
+            </section>
+        </section>
+        <section class="card__attrs__item">
+            <section class="attrs__item__key">
+                Население:
+            </section>
+            <section class="attrs__item__value">
+                {{info.population}}
+            </section>
+        </section>
+        <section class="card__attrs__item">
+            <section class="attrs__item__key">
+                Плотность населения:
+            </section>
+            <section class="attrs__item__value">
+                {{info.populationDensity}}
+            </section>
+        </section>
+        <section class="card__attrs__item">
+            <section class="attrs__item__key">
+                Площадь:
+            </section>
+            <section class="attrs__item__value">
+                {{info.area}}
+            </section>
+        </section>
+    </section>
+</article>
