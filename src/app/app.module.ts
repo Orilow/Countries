@@ -9,14 +9,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { FiltersComponent } from './filters/filters.component';
 import { CountriesComponent } from './countries/countries.component';
 import { LoaderComponent } from './loader/loader.component';
-import { LoaderInterceptorService } from './services/loader.interceptor'
+import { LoaderInterceptorService } from './services/loader.interceptor';
+import { CardComponent } from './card/card.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     FiltersComponent,
     CountriesComponent,
-    LoaderComponent
+    LoaderComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

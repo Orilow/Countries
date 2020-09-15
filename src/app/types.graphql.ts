@@ -3,7 +3,9 @@ import { type } from 'os';
 export type Country = {
     name: string;
     currencies: Currency[],
-    officialLanguages: Language[]
+    officialLanguages: Language[],
+    alpha2Code: string,
+    alpha3Code: string
 };
 
 export type Currency = {
@@ -16,4 +18,9 @@ export type Language = {
 
 export type CountriesQuery = {
     Country: Country[];
+    nextCountries: Country[];
+}
+
+export type CountryCardQuery = {
+    info: Country[]
 }
