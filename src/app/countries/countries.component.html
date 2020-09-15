@@ -26,12 +26,12 @@
         </section>
       </section>
     </article>
-    <section>
+    <section class="pagination">
       <button class="page-button" (click)="fetchMore('prev')" [attr.disabled]="previousPageAvailable ? null : true">
         <img *ngIf="previousPageAvailable; else previousPageNotAvailable" src="assets/pagination-arrow.svg" alt="Previous page">
         <ng-template #previousPageNotAvailable><img src="assets/page-arrow_disabled.svg" alt="Previous page"></ng-template>
       </button>
-      {{ pageNumber }}
+      <span class="pagination__page-number">{{pageNumber}}</span>
       <button class="page-button" (click)="fetchMore('next')" [attr.disabled]="nextpageAvailable ? null : true">
         <img class="next-page-button-img" *ngIf="nextpageAvailable; else nextPageNotAvailable" src="assets/pagination-arrow.svg" alt="Next page">
         <ng-template #nextPageNotAvailable><img class="next-page-button-img" src="assets/page-arrow_disabled.svg" alt="Next page"></ng-template>
