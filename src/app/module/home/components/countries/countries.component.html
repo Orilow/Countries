@@ -2,42 +2,56 @@
     <section class="title-container">
       <h1 class="page-title">Countries V2</h1>
     </section>
-    <app-card (toggleVisibility)="toggleCardVisibility()" [cardVisibility]="isCountryCardVisible" *ngIf="isCountryCardVisible" class="ch-box"></app-card>
+    <app-card (toggleVisibility)="toggleCardVisibility()"
+              [cardVisibility]="isCountryCardVisible"
+              *ngIf="isCountryCardVisible"
+              class="country-card"></app-card>
 
-    <article class="country-container" *ngFor="let country of countries">
-      <h2 class="country-name">{{country.name}}</h2>
-      <label class="card-pointer-img" for="cardInfo" alt="Card Pointer" (click)="getCountryCard(country.name)"></label>
-      <section class="country-attrs">
-        <section class="country-attr">
-          <div class="country-attr-name">Language:</div>
-          <div class="country-attr-value">
+    <article class="country" *ngFor="let country of countries">
+      <h2 class="country__name">{{country.name}}</h2>
+      <label class="country__card-pointer" (click)="getCountryCard(country.name)"></label>
+      <section class="country__attrs">
+        <section class="country__attr">
+          <div class="country__attr__name">Language:</div>
+          <div class="country__attr__value">
             <ng-container *ngFor="let language of country.officialLanguages">
               {{language.name}}
             </ng-container>
           </div>
         </section>
-        <section class="country-attr">
-          <div class="country-attr-name">Currency:</div>
-          <div class="country-attr-value">
+        <section class="country__attr">
+          <div class="country__attr__name">Currency:</div>
+          <div class="country__attr__value">
             <ng-container *ngFor="let currency of country.currencies">
               {{currency.code}}
-            </ng-container>  
+            </ng-container>
           </div>
         </section>
       </section>
     </article>
     <section class="pagination">
-      <button class="page-button" (click)="fetchMore('prev')" [attr.disabled]="previousPageAvailable ? null : true">
-        <img *ngIf="previousPageAvailable; else previousPageNotAvailable" src="assets/pagination-arrow.svg" alt="Previous page">
-        <ng-template #previousPageNotAvailable><img src="assets/page-arrow_disabled.svg" alt="Previous page"></ng-template>
+      <button class="page-button"
+              (click)="fetchMore('prev')"
+              [attr.disabled]="previousPageAvailable ? null : true">
+        <img *ngIf="previousPageAvailable; else previousPageNotAvailable"
+             src="assets/pagination-arrow.svg"
+             alt="Previous page">
+        <ng-template #previousPageNotAvailable>
+          <img src="assets/page-arrow_disabled.svg" alt="Previous page">
+        </ng-template>
       </button>
-      <span class="pagination__page-number">{{pageNumber}}</span>
-      <button class="page-button" (click)="fetchMore('next')" [attr.disabled]="nextpageAvailable ? null : true">
-        <img class="next-page-button-img" *ngIf="nextpageAvailable; else nextPageNotAvailable" src="assets/pagination-arrow.svg" alt="Next page">
-        <ng-template #nextPageNotAvailable><img class="next-page-button-img" src="assets/page-arrow_disabled.svg" alt="Next page"></ng-template>
+      <span class="pagination__page-number">{{currentPageNumber}}</span>
+      <button class="page-button"
+              (click)="fetchMore('next')"
+              [attr.disabled]="nextPageAvailable ? null : true">
+        <img class="next-page-button-img"
+             *ngIf="nextPageAvailable; else nextPageNotAvailable"
+             src="assets/pagination-arrow.svg"
+             alt="Next page">
+        <ng-template #nextPageNotAvailable>
+          <img class="next-page-button-img" src="assets/page-arrow_disabled.svg" alt="Next page">
+        </ng-template>
       </button>
     </section>
   </main>
   <app-loader></app-loader>
-  
-  

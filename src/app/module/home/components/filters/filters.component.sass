@@ -1,6 +1,6 @@
 @import ../../../../../styling/variables
 
-.filters-container
+.filters
     width: 400px
     position: absolute
     right: 0
@@ -11,19 +11,50 @@
     border-left: 1px solid #A5A5A5
     padding-left: 33px
 
-.filters-title
+.filters__title
     font-size: 24px
     font-weight: normal
 
-.filters-input-container
+.filters__input-container
     position: relative
     margin-bottom: 40px
+
+.filters__input
+  width: 330px
+  border: 0
+  font-size: 16px
+  padding-bottom: 7px
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3)
+  &:focus
+    outline: 0
+    border-color: $blue-color
+    caret-color: $blue-color
+
+.filters__input_filled
+  outline: none
+  border-color: $blue-color
+  caret-color: $blue-color
+  + .filters__input__placeholder
+    @extend .filters__input__placeholder_shift
+
+.filters__input__placeholder
+  position: absolute
+  left: 2px
+  top: 22px
+  transition: 0.2s ease all
+  pointer-events: none
+  opacity: 0.4
+
+.filters__input__placeholder_shift
+  top: 0
+  left: 2px
+  font-size: 14px
 
 .filters__language
     position: relative
     margin-bottom: 24px
 
-.filters-language-title
+.filters__language__title
     position: absolute
     bottom: 0
     left: 0
@@ -36,7 +67,6 @@
     opacity: 0.4
     font-size: 14px
 
-
 .filters__language__title-container
     position: relative
     height: 36px
@@ -46,54 +76,19 @@
     opacity: 0
     bottom: 0
     left: 0
-
     transition: .3s ease-in-out all
 
 .filters__language_chosen_show
     transition-delay: .3s
     opacity: 1
 
-
-
-.filters-input
-    width: 330px
-    border: 0
-    font-size: 16px
-    padding-bottom: 7px
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3)
-    &:focus
-        outline: 0
-        border-color: $blue-color
-        caret-color: $blue-color
-
-.filters-input_filled
-    outline: none
-    border-color: $blue-color
-    caret-color: $blue-color
-    + .filters-input-placeholder
-        @extend .filters-input-placeholder__shift
-
-.filters-input-placeholder
-    position: absolute
-    left: 2px
-    top: 22px
-    transition: 0.2s ease all
-    pointer-events: none
-    opacity: 0.4
-
-.filters-input-placeholder__shift
-    top: 0px
-    left: 2px
-    font-size: 14px
-
-
-.language-checkbox-container
+.language__checkbox-container
     border-top: 1px solid $blue-color
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.23), 0px 3px 6px rgba(0, 0, 0, 0.16)
     width: 330px
     padding-top: 17px
 
-.language-checkbox
+.language__checkbox
     margin: 0 13px 16px 17px
 
 .filters__currency__title
@@ -107,4 +102,4 @@
     padding-left: 25px
 
 .filters__currency__container
-    margin-top:20px
+    margin-top: 20px

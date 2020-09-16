@@ -12,15 +12,11 @@ export class CountriesComponent implements OnInit{
   countries: Country[];
   isCountryCardVisible: boolean;
 
-  get countryCardInfo() {
-    return this.requestService.countryCard.value;
-  }
-
-  get pageNumber() {
+  get currentPageNumber() {
     return this.requestService.currentOffset / 5 + 1;
   }
 
-  get nextpageAvailable() {
+  get nextPageAvailable() {
     return this.requestService.nextPageAvailable;
    }
 
@@ -33,10 +29,7 @@ export class CountriesComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.requestService.countriesList$.subscribe(data => {
-      console.log(data);
-      this.countries = data
-    });
+    this.requestService.countriesList$.subscribe(data => this.countries = data);
   }
 
   fetchMore(direction: string) {
@@ -48,19 +41,10 @@ export class CountriesComponent implements OnInit{
   }
 
   getCountryCard(countryName: string) {
-    console.log(this);
-    this.requestService.getCountryCard(countryName, this.renderCard.bind(this));
+    this.requestService.getCountryCard(countryName, this.toggleCardVisibility.bind(this));
   }
 
   toggleCardVisibility() {
     this.isCountryCardVisible = !this.isCountryCardVisible;
   }
-
-
-  renderCard(card: Country) {
-    console.log(card);
-    console.log(this);
-    this.toggleCardVisibility();
-  }
-
 }

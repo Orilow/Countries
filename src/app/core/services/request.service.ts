@@ -19,7 +19,7 @@ export class RequestService {
 
   private countries: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>(undefined);
   public countriesList$: Observable<Country[]> = this.countries.asObservable();
-  public countryCard: BehaviorSubject<Country> = new BehaviorSubject<Country>(undefined);
+  private countryCard: BehaviorSubject<Country> = new BehaviorSubject<Country>(undefined);
   public countryCard$: Observable<Country> = this.countryCard.asObservable();
   private lastRequest: string;
   public currentOffset= 0;
@@ -44,7 +44,6 @@ export class RequestService {
   }
 
   fetchMore(offset: number) {
-    console.log(this.lastRequest);
     this.currentOffset += offset;
     const requestMethodName = this.lastRequest.split(' ')[0];
     if (this.lastRequest === this.makeMainRequest.name) {
@@ -67,11 +66,7 @@ export class RequestService {
     this.currentOffset === 0 ? this.previousPageAvailable = false : this.previousPageAvailable = true;
     if (data.Country.length < environment.pageItemsCount) {
       this.nextPageAvailable = false;
-    } else if (data.nextCountries.length !== 0) {
-      this.nextPageAvailable = true;
-    } else {
-      this.nextPageAvailable = false;
-    }
+    } else this.nextPageAvailable = data.nextCountries.length !== 0;
   }
 
   makeMainRequest() {
@@ -128,7 +123,7 @@ export class RequestService {
     }).subscribe(response => {
       this.refreshPaginationButtons(response.data);
       this.countries.next(response.data.Country)
-    })
+    });
     this.lastRequest = requestName;
   }
 
@@ -169,7 +164,7 @@ export class RequestService {
     }).subscribe(response => {
       this.refreshPaginationButtons(response.data);
       this.countries.next(response.data.Country)
-    })
+    });
     this.lastRequest = requestName;
   }
 }

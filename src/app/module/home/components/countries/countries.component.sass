@@ -12,32 +12,40 @@ main
     font-size: 28px
     font-weight: 500
 
-.country-container
+.country
     width: 1375px
     height: 106px
     margin-bottom: 30px
     border-bottom: 1px solid #A5A5A5
 
-.country-name
+.country__name
     display: inline
     font-size: 20px
     margin: 0
 
-.country-attrs
+.country__card-pointer
+  cursor: pointer
+  display: inline-block
+  width: 16px
+  height: 16px
+  padding-left: 23px
+  background: url('../../../../../assets/card-pointer.svg') no-repeat right center
+
+.country__attrs
     margin-top: 30px
     font-size: 16px
     display: flex
     flex-direction: row
 
-.country-attr
+.country__attr
     flex-basis: 33%
     display: flex
     max-width: 33%
 
-.country-attr-name
+.country__attr__name
     flex-basis: 33%
 
-.country-attr-value
+.country__attr__value
     color: #2962FF
     flex-basis: 60%
     overflow: hidden
@@ -53,15 +61,7 @@ main
 .next-page-button-img
     transform: rotate(180deg)
 
-.card-pointer-img
-    cursor: pointer
-    display: inline-block
-    width: 16px
-    height: 16px
-    padding-left: 23px
-    background: url('../../../../../assets/card-pointer.svg') no-repeat right center
-
-.ch-box
+.country-card
     z-index: 100
     top: 0
     left: 0
