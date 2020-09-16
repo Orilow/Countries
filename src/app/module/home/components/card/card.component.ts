@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Country } from '../types.graphql';
-import { RequestService } from '../services/request.service';
+import { Country } from '../../../../shared/types/types.graphql';
+import { RequestService } from '../../../../core/services/request.service';
 
 @Component({
   selector: 'app-card',

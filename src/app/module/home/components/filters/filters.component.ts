@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../services/request.service';
+import { RequestService } from '../../../../core/services/request.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -19,8 +19,8 @@ export class FiltersComponent implements OnInit {
     return Number(Object.values(this.filtersForm.controls['languages'].value).reduce((sum: number, x: boolean) => x === true ? sum + 1 :  sum));
   }
   filtersForm: FormGroup;
-  
-  constructor(private requestService: RequestService, private formBuilder:FormBuilder) { 
+
+  constructor(private requestService: RequestService, private formBuilder:FormBuilder) {
     this.filtersForm = formBuilder.group({
       input: [''],
       languages: formBuilder.group({

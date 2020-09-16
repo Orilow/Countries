@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { LoaderState } from '../types.loader';
+import { LoaderState } from '../../shared/types/types.loader';
 import { Subject } from 'rxjs';
 
 @Injectable({

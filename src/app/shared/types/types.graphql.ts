@@ -21,11 +21,11 @@ export type Language = {
     name: string;
 }
 
-export type CountriesQuery = {
+export type CountriesQueryType = {
     Country: Country[];
     nextCountries: Country[];
 }
 
-export type CountryCardQuery = {
+export type CountryCardQueryType = {
     info: Country[]
 }

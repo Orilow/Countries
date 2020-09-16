@@ -1,90 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import {Country, CountriesQuery, CountryCardQuery} from '../types.graphql';
+import {Country, CountriesQueryType, CountryCardQueryType} from '../../shared/types/types.graphql';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
-
-const CountriesGQLQuery = gql`
-query CountriesQuery($recordCount: Int, $filterValue: String, $offset: Int, $secondOffset: Int){
-  Country: Country (filter: {name_contains:$filterValue}, first: $recordCount, offset: $offset){
-    name
-    currencies(orderBy: name_asc) { 
-      code
-    }
-    officialLanguages(orderBy: name_asc) {
-      name
-    }
-  }
-  nextCountries: Country (filter: {name_contains:$filterValue}, first: $recordCount, offset: $secondOffset){
-   _id
-  }
-}`;
-
-const CountriesGQLQueryWithCurrency = gql`query CountriesQuery($recordCount: Int, $filterValue: String, $currency: String, $offset: Int, $secondOffset: Int){
-  Country: Country (filter: {name_contains:$filterValue, currencies_some: {code: $currency}}, first: $recordCount, offset: $offset){
-    name
-    currencies(orderBy: name_asc) {
-      code
-    }
-    officialLanguages(orderBy: name_asc) {
-      name
-    }
-  }
-  nextCountries: Country (filter: {name_contains:$filterValue, currencies_some: {code: $currency}}, first: $recordCount, offset: $secondOffset) {
-    _id
-  }
-}`;
-
-const CountriesGQLQueryWithLanguages = gql`
-query CountriesQuery($recordCount: Int, $filterValue: String, $offLangs: [String!], $offset: Int, $secondOffset: Int){
-  Country: Country (filter: {name_contains:$filterValue, officialLanguages_some: {name_in: $offLangs}}, first: $recordCount, offset: $offset){
-    name
-    currencies(orderBy: name_asc) {
-      code
-    }
-    officialLanguages(orderBy: name_asc) {
-      name
-    }
-  }
-  nextCountries: Country (filter: {name_contains:$filterValue, officialLanguages_some: {name_in: $offLangs}}, first: $recordCount, offset: $secondOffset){
-    _id
-  }
-}`;
-
-const CountriesGQLQueryFull = gql`query CountriesQuery($recordCount: Int, $filterValue: String, $currency: String, $offLangs: [String!], $offset: Int, $secondOffset: Int){
-  Country: Country (filter: {name_contains:$filterValue, currencies_some: {code: $currency}, officialLanguages_some: {name_in: $offLangs}}, first: $recordCount, offset: $offset){
-    name
-    currencies(orderBy: name_asc) {
-      code
-    }
-    officialLanguages(orderBy: name_asc) {
-      name
-    }
-  }
-  nextCountries: Country (filter: {name_contains:$filterValue, currencies_some: {code: $currency}, officialLanguages_some: {name_in: $offLangs}}, first: $recordCount, offset: $secondOffset) {
-    _id
-  }
-}`
-
-const CountryCardReq = gql`query CountryCard ($name: String!){
-	info: Country(filter: {name: $name}) {
-    name
-    alpha2Code
-    alpha3Code
-    area
-    capital
-    populationDensity
-    demonym
-    gini
-    nameTranslation
-    nativeName
-    numericCode
-    population
-    location {longitude, latitude}
-    # check the docs for more info
-  }
-}`
+import {
+  CountryCardQuery,
+  CountriesGQLQuery,
+  CountriesGQLQueryFull,
+  CountriesGQLQueryWithCurrency,
+  CountriesGQLQueryWithLanguages
+} from "../../shared/queries.graphql";
 
 
 @Injectable({
@@ -107,8 +32,8 @@ export class RequestService {
   }
 
   getCountryCard(countryName: string, callbackFunc: Function) {
-    this.apollo.query<CountryCardQuery>({
-      query: CountryCardReq,
+    this.apollo.query<CountryCardQueryType>({
+      query: CountryCardQuery,
       variables: {
         name: countryName
       }
@@ -138,7 +63,7 @@ export class RequestService {
     }
   }
 
-  refreshPaginationButtons(data: CountriesQuery) {
+  refreshPaginationButtons(data: CountriesQueryType) {
     this.currentOffset === 0 ? this.previousPageAvailable = false : this.previousPageAvailable = true;
     if (data.Country.length < environment.pageItemsCount) {
       this.nextPageAvailable = false;
@@ -153,7 +78,7 @@ export class RequestService {
     if (this.lastRequest !== this.makeMainRequest.name) {
       this.currentOffset = 0;
     }
-    this.apollo.watchQuery<CountriesQuery>({
+    this.apollo.watchQuery<CountriesQueryType>({
       query: CountriesGQLQuery,
       variables: {
         recordCount: environment.pageItemsCount,
@@ -172,7 +97,7 @@ export class RequestService {
     const requestName = this.makeFilteredRequest.name + ' ' + filterValue;
     if (this.lastRequest !== requestName)
         this.currentOffset = 0;
-    this.apollo.query<CountriesQuery>({
+    this.apollo.query<CountriesQueryType>({
       query: CountriesGQLQuery,
       variables:{
         recordCount: environment.pageItemsCount,
@@ -191,7 +116,7 @@ export class RequestService {
     const requestName = this.makeFilteredRequestWithLangs.name + ' ' + filterValue + ' ' + JSON.stringify(langsList);
     if (this.lastRequest !== requestName)
         this.currentOffset = 0;
-    this.apollo.query<CountriesQuery>({
+    this.apollo.query<CountriesQueryType>({
       query: CountriesGQLQueryWithLanguages,
       variables:{
         recordCount: environment.pageItemsCount,
@@ -211,7 +136,7 @@ export class RequestService {
     const requestName = this.makeFilteredRequestWithCurrencies.name + ' ' + filterValue + ' ' + currency;
     if (this.lastRequest !== requestName)
         this.currentOffset = 0;
-    this.apollo.query<CountriesQuery>({
+    this.apollo.query<CountriesQueryType>({
       query: CountriesGQLQueryWithCurrency,
       variables:{
         recordCount: environment.pageItemsCount,
@@ -231,7 +156,7 @@ export class RequestService {
     const requestName = this.makeFilteredFullRequest.name + ' ' + filterValue + ' ' + JSON.stringify(offLangs) + ' ' + currency;
     if (this.lastRequest !== requestName)
         this.currentOffset = 0;
-    this.apollo.query<CountriesQuery>({
+    this.apollo.query<CountriesQueryType>({
       query: CountriesGQLQueryFull,
       variables:{
         recordCount: environment.pageItemsCount,

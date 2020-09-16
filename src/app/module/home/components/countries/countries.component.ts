@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../services/request.service'
-import { Country } from '../types.graphql';
+import { RequestService } from '../../../../core/services/request.service'
+import { Country } from '../../../../shared/types/types.graphql';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,7 +15,7 @@ export class CountriesComponent implements OnInit{
   get countryCardInfo() {
     return this.requestService.countryCard.value;
   }
-  
+
   get pageNumber() {
     return this.requestService.currentOffset / 5 + 1;
   }

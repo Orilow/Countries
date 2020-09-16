@@ -1,4 +1,4 @@
-@import ../../styling/variables
+@import ../../../../../styling/variables
 
 .filters-container
     width: 400px
@@ -18,7 +18,7 @@
 .filters-input-container
     position: relative
     margin-bottom: 40px
-    
+
 .filters__language
     position: relative
     margin-bottom: 24px
@@ -30,12 +30,12 @@
     transition: 0.3s ease-in-out all
     pointer-events: none
     padding-bottom: 5px
-    
+
 .filters__language__title_shift
     transform: translate(0,-20px)
     opacity: 0.4
     font-size: 14px
-    
+
 
 .filters__language__title-container
     position: relative
@@ -46,13 +46,13 @@
     opacity: 0
     bottom: 0
     left: 0
-    
+
     transition: .3s ease-in-out all
 
 .filters__language_chosen_show
     transition-delay: .3s
     opacity: 1
-    
+
 
 
 .filters-input
@@ -64,12 +64,12 @@
     &:focus
         outline: 0
         border-color: $blue-color
-        caret-color: $blue-color 
+        caret-color: $blue-color
 
 .filters-input_filled
     outline: none
     border-color: $blue-color
-    caret-color: $blue-color 
+    caret-color: $blue-color
     + .filters-input-placeholder
         @extend .filters-input-placeholder__shift
 
@@ -95,7 +95,7 @@
 
 .language-checkbox
     margin: 0 13px 16px 17px
-    
+
 .filters__currency__title
     font-weight: bold
     font-size: 16px
