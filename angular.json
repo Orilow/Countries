@@ -56,6 +56,9 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "./tsconfig-es5.app.json"
             }
           }
         },
@@ -67,6 +70,9 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-apollo-test:build:production"
+            },
+            "es5": {
+              "browserTarget": "angular-apollo-test:build:es5"
             }
           }
         },

@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FiltersComponent implements OnInit {
 
+  private changesTimeout;
+
   get isInputFilled() {
     return this.filtersForm.get('input').value !== '';
   }
@@ -28,12 +30,23 @@ export class FiltersComponent implements OnInit {
       }),
       currency: formBuilder.control('')
     });
+
+    this.changesTimeout = setTimeout('',0);
+    this.onChanges();
   }
 
   ngOnInit(): void {
   }
 
+  onChanges() {
+    this.filtersForm.valueChanges.subscribe(val => {
+      clearTimeout(this.changesTimeout);
+      this.changesTimeout = setTimeout(this.onSubmit.bind(this), 1000);
+    })
+  }
+
   onSubmit() {
+    clearTimeout(this.changesTimeout);
     const input = this.filtersForm.get('input').value;
     const chosenLangs = this.filtersForm.controls['languages'].value;
     const chosenCurrency = this.filtersForm.controls['currency'].value;
@@ -44,11 +57,6 @@ export class FiltersComponent implements OnInit {
         langsToSubmit.push(key);
       }
     }
-
-    // console.log(input);
-    // console.log(langsToSubmit);
-    // console.log(chosenCurrency);
-
 
     if (langsToSubmit.length > 0 && chosenCurrency !== '') {
       this.requestService.makeFilteredFullRequest(input, langsToSubmit, chosenCurrency);
