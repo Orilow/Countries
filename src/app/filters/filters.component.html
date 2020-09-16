@@ -3,11 +3,14 @@
         <h2 class="filters-title">Фильтры</h2>
         <section class="filters-input-container">
             <br>
-                <input formControlName="input" name="filters" class="filters-input" type="text">
-                <span class="filters-input-placeholder" [ngClass]="{'filters-input-placeholder__shift':filtersInput}">Название</span>
+                <input formControlName="input" name="filters" class="filters-input" [ngClass]="{'filters-input_filled':isInputFilled}" type="text">
+                <span class="filters-input-placeholder">Название</span>
         </section>
-        <article formGroupName="languages">
-            <span class="filters-language-title">Язык</span>
+        <article class="filters__language" formGroupName="languages">
+            <section class="filters__language__title-container">
+                <span class="filters-language-title" [ngClass]="{'filters__language__title_shift':languagesChosen}">Язык</span>
+                <span class="filters__language_chosen_hidden" [ngClass]="{'filters__language_chosen_show':languagesChosen}">Выбрано: {{languagesChosen}}</span>    
+            </section>
             <section class="language-checkbox-container">
                 <section>
                     <input type="checkbox" class="language-checkbox" name="language" id="checkbox-russian" formControlName="Russian">
@@ -24,27 +27,27 @@
             </section>
         </article>
         <article>
-            <span>Валюта</span>
+            <span class="filters__currency__title">Валюта</span>
             <section>
-                <section>
-                    <input type="radio" id="none-radio" name="currency" value="" formControlName="currency" checked>
-                    <label for="none-radio">None</label>    
+                <section class="filters__currency__container">
+                    <input class="currency__radio" type="radio" id="none-radio" name="currency" value="" formControlName="currency" checked>
+                    <label class="currency__radio-label" for="none-radio">None</label>    
                 </section>
                 <section>
-                    <input type="radio" id="usd-radio" name="currency" value="USD" formControlName="currency">
-                    <label for="usd-radio">USD</label>    
+                    <input class="currency__radio" type="radio" id="usd-radio" name="currency" value="USD" formControlName="currency">
+                    <label class="currency__radio-label" for="usd-radio">USD</label>    
                 </section>
                 <section>
-                    <input type="radio" id="eur-radio" name="currency" value="EUR" formControlName="currency">
-                    <label for="eur-radio">EUR</label>    
+                    <input class="currency__radio" type="radio" id="eur-radio" name="currency" value="EUR" formControlName="currency">
+                    <label class="currency__radio-label" for="eur-radio">EUR</label>    
                 </section>
                 <section>
-                    <input type="radio" id="rub-radio" name="currency" value="RUB" formControlName="currency">
-                    <label for="rub-radio">RUB</label>    
+                    <input class="currency__radio" type="radio" id="rub-radio" name="currency" value="RUB" formControlName="currency">
+                    <label class="currency__radio-label" for="rub-radio">RUB</label>    
                 </section>
                 <section>
-                    <input type="radio" id="cny-radio" name="currency" value="CNY" formControlName="currency">
-                    <label for="cny-radio">CNY</label>    
+                    <input class="currency__radio" type="radio" id="cny-radio" name="currency" value="CNY" formControlName="currency">
+                    <label class="currency__radio-label" for="cny-radio">CNY</label>    
                 </section>
             </section>
         </article>

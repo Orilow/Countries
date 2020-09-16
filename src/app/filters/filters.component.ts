@@ -9,7 +9,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FiltersComponent implements OnInit {
 
-  filtersInput: string;
+  get isInputFilled() {
+    return this.filtersForm.get('input').value !== '';
+  }
+
+  get languagesChosen() {
+    return Number(Object.values(this.filtersForm.controls['languages'].value).reduce((sum: number, x: boolean) => x === true ? sum + 1 :  sum));
+  }
   filtersForm: FormGroup;
   
   constructor(private requestService: RequestService, private formBuilder:FormBuilder) { 
@@ -39,9 +45,9 @@ export class FiltersComponent implements OnInit {
       }
     }
 
-    console.log(input);
-    console.log(langsToSubmit);
-    console.log(chosenCurrency);
+    // console.log(input);
+    // console.log(langsToSubmit);
+    // console.log(chosenCurrency);
 
 
     if (langsToSubmit.length > 0 && chosenCurrency !== '') {
